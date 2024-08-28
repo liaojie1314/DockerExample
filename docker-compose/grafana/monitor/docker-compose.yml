@@ -1,0 +1,22 @@
+version: '3'
+# 执行脚本；docker-compose -f docker-compose.yml up -d
+# 拷贝配置；docker container cp grafana:/etc/grafana/ ./docs/dev-ops/
+services:
+  # 数据采集
+  prometheus:
+    image: bitnami/prometheus:2.47.2
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  # 监控界面
+  grafana:
+    image: grafana/grafana:10.2.0
+    container_name: grafana
+    ports:
+      - 4000:4000
+    depends_on:
+      - prometheus
+    volumes:
+      - ./etc/grafana:/etc/grafana
