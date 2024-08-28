@@ -1,0 +1,96 @@
+version: '3.9'
+services:
+  mysql:
+    image: mysql:8.0.30
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: 1024
+    depends_on:
+      - mysql-job-dbdata
+    ports:
+      - "13306:3306"
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+      - ./mysql/sql:/docker-entrypoint-initdb.d
+    volumes_from:
+      - mysql-job-dbdata
+    networks:
+      - default
+
+  # 自动加载数据
+  mysql-job-dbdata:
+    image: alpine:3.18.2
+    container_name: mysql-job-dbdata
+    volumes:
+      - /var/lib/mysql
+
+  # canal-server 伪装成mysql的从库
+  canal-server:
+    image: canal/canal-server:v1.1.7
+    container_name: canal-server
+    restart: unless-stopped
+    ports:
+      - "11111:11111"
+    volumes:
+      - ./canal/instance.properties:/home/admin/canal-server/conf/example/instance.properties
+    depends_on:
+      - mysql
+    networks:
+      - default
+
+  # canal-adapter 负责数据分发
+  canal-adapter:
+    image: coopersoft/canal-adapter:v1.1.6
+    container_name: canal-adapter
+    restart: unless-stopped
+    ports:
+      - "8082:8081"
+    volumes:
+      - ./canal-adapter/application.yml:/opt/canal-adapter/conf/application.yml
+      - ./canal-adapter/es7:/opt/canal-adapter/conf/es7
+    depends_on:
+      - canal-server
+    networks:
+      - default
+
+  elasticsearch:
+    image: elasticsearch:7.17.14
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    container_name: elasticsearch
+    restart: always
+    environment:
+      - 'cluster.name=elasticsearch' # 设置集群名称为elasticsearch
+      - 'discovery.type=single-node' # 以单一节点模式启动
+      - "cluster.name=docker-cluster" # 设置名称
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m' # 设置使用jvm内存大小
+    networks:
+      - default
+
+  kibana:
+    image: kibana:7.17.14
+    container_name: kibana
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - '5601:5601'
+    links:
+      - elasticsearch:es #可以用es这个域名访问elasticsearch服务
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200 #设置访问elasticsearch的地址
+      - 'elasticsearch.hosts=http://es:9200' #设置访问elasticsearch的地址
+      - I18N_LOCALE=zh-CN
+    networks:
+      - default
+    depends_on:
+      - elasticsearch
+
+networks:
+  default:
+    driver: bridge

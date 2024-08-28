@@ -1,0 +1,17 @@
+dataSourceKey: db_00
+destination: example
+groupId: g1
+esMapping:
+  _index: test.user_order
+  _id: _id
+  sql: "select t.uuid as _id,
+               t.user_id as _user_id,
+               t.user_name as _user_name,
+               t.sku_name as _sku_name,
+               t.order_id as _order_id,
+               t.uuid as _uuid,
+               t.create_time as _create_time,
+               t.update_time as _update_time
+        from user_order_3 t"
+  etlCondition: "where t.update_time>={}"
+  commitBatch: 3000

@@ -1,0 +1,45 @@
+server:
+  port: 8081
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+
+canal.conf:
+  mode: tcp #tcp kafka rocketMQ rabbitMQ
+  flatMessage: true
+  zookeeperHosts:
+  syncBatchSize: 1000
+  retries: -1
+  timeout:
+  accessKey:
+  secretKey:
+  consumerProperties:
+    canal.tcp.server.host: canal-server:11111
+    canal.tcp.zookeeper.hosts:
+    canal.tcp.batch.size: 500
+    canal.tcp.username:
+    canal.tcp.password:
+
+  # 需要同步的数据库配置
+  srcDataSources:
+    db_00:
+      url: jdbc:mysql://mysql:3306/db_00?useUnicode=true
+      username: canal
+      password: canal
+    db_01:
+      url: jdbc:mysql://mysql:3306/db_01?useUnicode=true
+      username: canal
+      password: canal
+  canalAdapters:
+  - instance: example # canal instance Name or mq topic name
+    groups:
+    - groupId: g1
+      outerAdapters:
+      - name: logger
+      - name: es7
+        hosts: elasticsearch:9200 # 127.0.0.1:9200 for rest mode
+        properties:
+          mode: rest # transport or rest
+          cluster.name: docker-cluster
