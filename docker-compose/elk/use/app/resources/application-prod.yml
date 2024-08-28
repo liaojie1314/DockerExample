@@ -1,0 +1,12 @@
+server:
+  port: 8091
+
+# 日志
+logging:
+  level:
+    root: info
+  config: classpath:logback-spring.xml
+
+# logstash部署的服务器IP
+logstash:
+  host: 127.0.0.1

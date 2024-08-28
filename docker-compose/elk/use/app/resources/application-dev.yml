@@ -1,0 +1,18 @@
+server:
+  port: 8091
+  tomcat:
+    max-connections: 20
+    threads:
+      max: 20
+      min-spare: 10
+    accept-count: 10
+
+# 日志
+logging:
+  level:
+    root: info
+  config: classpath:logback-spring.xml
+
+# logstash部署的服务器IP
+logstash:
+  host: 127.0.0.1
