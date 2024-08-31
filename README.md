@@ -25,6 +25,10 @@
     + K = Kibana：Kibana  是一种数据可视化和挖掘工具，可以用于日志和时间序列分析、应用程序监控和运营智能使用案例。它提供了强大且易用的功能，例如直方图、线形图、饼图、热图和内置的地理空间支持。此外，付费的 Kibana 还有 x-pack-jdbc 可以使用，让你就像使用 MyBatis 操作 MySQL 数据库一样操作  Elasticsearch 数据。
 + grafana
   + 使用 Prometheus + Grafana 部署监控
++ ignite
+  + 基于内存的分布式SQL数据库Apache Ignite的部署
+  + Apache  Ignite是一个兼容ANSI-99、水平可扩展以及容错的分布式SQL数据库，作为一个SQL数据库，Ignite支持所有的DML指令，包括SELECT、UPDATE、INSERT和DELETE，它还实现了一个与分布式系统有关的DDL指令的子集。Ignite的一个突出特性是完全支持分布式的SQL关联，Ignite支持并置和非并置的数据关联。并置时，关联是在每个节点的可用数据集上执行的，而不需要在网络中移动大量的数据，这种方式在分布式数据库中提供了最好的扩展性和性能。
+
 
 
 

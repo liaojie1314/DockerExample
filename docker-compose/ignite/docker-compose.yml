@@ -1,0 +1,8 @@
+version: '3.9'
+# https://hub.docker.com/r/apacheignite/ignite/tags
+services:
+  ignite:
+    image: apacheignite/ignite:2.16.0
+    container_name: ignite
+    ports:
+      - 10800:10800
