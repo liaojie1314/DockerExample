@@ -1,0 +1,20 @@
+version: '3.9'
+# 执行脚本；docker-compose -f docker-compose-v1.0.yml up -d
+services:
+  jenkins:
+    image: jenkins/jenkins:2.471-jdk17
+    container_name: jenkins
+    privileged: true
+    user: root
+    ports:
+      - "9090:8080"
+      - "50001:50000"
+    volumes:
+      - ./jenkins_home:/var/jenkins_home # 如果不配置到云服务器路径下，则可以配置 jenkins_home 会创建一个数据卷使用
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/local/bin/docker
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false # 禁止安装向导「如果需要密码则不要配置」docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+
+volumes:
+  jenkins_home:
