@@ -30,7 +30,9 @@
   + Apache  Ignite是一个兼容ANSI-99、水平可扩展以及容错的分布式SQL数据库，作为一个SQL数据库，Ignite支持所有的DML指令，包括SELECT、UPDATE、INSERT和DELETE，它还实现了一个与分布式系统有关的DDL指令的子集。Ignite的一个突出特性是完全支持分布式的SQL关联，Ignite支持并置和非并置的数据关联。并置时，关联是在每个节点的可用数据集上执行的，而不需要在网络中移动大量的数据，这种方式在分布式数据库中提供了最好的扩展性和性能。
 + jenkins
   + 主要作用:把需要在本地机器完成的 Maven 构建、Docker  镜像发布、云服务器部署等系列动作全部集成在一个服务下。简化构建部署操作过程，因为 Jenkins 也被称为  CI&CD(持续集成&持续部署) 工具。提供超过 1000 个插件(Maven、Git、NodeJs)来支持构建、部署、自动化， 满足任何项目的需要。
-
++ mysql
+  + MySQL一主二从同步高可用集群
+  + [详细搭建过程](https://www.yuanyuan.blog/posts/bad9d448.html#mysql%E4%B8%80%E4%B8%BB%E4%BA%8C%E4%BB%8E%E5%90%8C%E6%AD%A5%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4)
 
 
 
