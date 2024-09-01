@@ -1,0 +1,5 @@
+spring:
+  config:
+    name: skywalking-app
+  profiles:
+    active: dev
