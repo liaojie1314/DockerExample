@@ -34,6 +34,10 @@
   + MySQL一主二从同步高可用集群
   + [详细搭建过程](https://www.yuanyuan.blog/posts/bad9d448.html#mysql%E4%B8%80%E4%B8%BB%E4%BA%8C%E4%BB%8E%E5%90%8C%E6%AD%A5%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4)
 
++ redis-sentinel
+  + redis高可用一主二从三哨兵集群
+  + [详细搭建过程](https://www.yuanyuan.blog/posts/bad9d448.html#redis%E9%AB%98%E5%8F%AF%E7%94%A8%E4%B8%80%E4%B8%BB%E4%BA%8C%E4%BB%8E%E4%B8%89%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4)
+
 
 
 

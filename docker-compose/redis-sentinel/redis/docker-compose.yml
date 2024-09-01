@@ -1,0 +1,29 @@
+version: '4.1'
+services:
+  master:
+    image: redis
+    container_name: redis-master
+    restart: always
+    command: redis-server --requirepass 1024 --protected-mode no --slave-announce-ip 192.168.1.10 --slave-announce-port 6379 --masterauth 1024 --appendonly yes
+    ports:
+      - 6379:6379
+    volumes:
+      - ./master_data:/data
+  slave1:
+    image: redis
+    container_name: redis-slave-1
+    restart: always
+    command: redis-server --slaveof redis-master 6379  --requirepass 1024 --protected-mode no --slave-announce-ip 192.168.1.10 --masterauth 1024 --slave-announce-port 6380 --appendonly yes
+    ports:
+      - 6380:6379
+    volumes:
+      - ./slave-1_data:/data
+  slave2:
+    image: redis
+    container_name: redis-slave-2
+    restart: always
+    command: redis-server --slaveof redis-master 6379  --requirepass 1024 --protected-mode no --slave-announce-ip 192.168.1.10 --masterauth 1024 --slave-announce-port 6381 --appendonly yes
+    ports:
+      - 6381:6379
+    volumes:
+      - ./slave-2_data:/data
