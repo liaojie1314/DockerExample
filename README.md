@@ -40,6 +40,9 @@
 + skywalking
   + 通过 Docker 方式部署一套 skywalking 非入侵的全链路监控系统,，并在对应的测试工程中通过 skywalking-agent 字节码增强组件，采集系统运行时的各项信息到 skywalking-ui 监控平台观察数据。
 
++ xxl-job
+  + XXL-Job 分布式任务调度
+
 
 
 

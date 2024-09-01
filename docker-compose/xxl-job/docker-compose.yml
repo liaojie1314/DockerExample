@@ -1,0 +1,48 @@
+# 命令执行 docker-compose up -d
+version: '3.9'
+services:
+  # http://127.0.0.1:9090/xxl-job-admin admin/123456 - 安装后稍等会访问即可
+  xxl-job-admin:
+    image: xuxueli/xxl-job-admin:2.4.1
+    container_name: xxl-job-admin
+    depends_on:
+      - mysql
+    ports:
+      - "9090:9090"
+    links:
+      - mysql
+    volumes:
+      - ./data/logs:/data/applogs
+      - ./data/xxl-job/:/xxl-job
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/xxl_job?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1024
+      - SERVER_PORT=9090
+
+  mysql:
+    image: mysql:8.0.30
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      TZ: Asia/Shanghai
+      # MYSQL_ALLOW_EMPTY_PASSWORD: 'yes' 可配置无密码，注意配置 SPRING_DATASOURCE_PASSWORD=
+      MYSQL_ROOT_PASSWORD: 1024
+      MYSQL_USER: yuanyuan
+      MYSQL_PASSWORD: 1024
+    depends_on:
+      - mysql-job-dbdata
+    ports:
+      - "13306:3306"
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    volumes_from:
+      - mysql-job-dbdata
+
+  # 自动加载数据
+  mysql-job-dbdata:
+    image: alpine:3.18.2
+    container_name: mysql-job-dbdata
+    volumes:
+      - /var/lib/mysql
+
