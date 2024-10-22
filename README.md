@@ -33,17 +33,17 @@
 + mysql
   + MySQL一主二从同步高可用集群
   + [详细搭建过程](https://www.yuanyuan.blog/posts/bad9d448.html#mysql%E4%B8%80%E4%B8%BB%E4%BA%8C%E4%BB%8E%E5%90%8C%E6%AD%A5%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4)
-
 + redis-sentinel
   + redis高可用一主二从三哨兵集群
   + [详细搭建过程](https://www.yuanyuan.blog/posts/bad9d448.html#redis%E9%AB%98%E5%8F%AF%E7%94%A8%E4%B8%80%E4%B8%BB%E4%BA%8C%E4%BB%8E%E4%B8%89%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4)
 + skywalking
   + 通过 Docker 方式部署一套 skywalking 非入侵的全链路监控系统,，并在对应的测试工程中通过 skywalking-agent 字节码增强组件，采集系统运行时的各项信息到 skywalking-ui 监控平台观察数据。
-
 + xxl-job
   + XXL-Job 分布式任务调度
-
 + zookeeper
++ gla
+  + Grafana+Loki+Alloy轻量级日志系统
+
 
 
 ## 相关阅读
