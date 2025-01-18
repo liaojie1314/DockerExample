@@ -43,6 +43,7 @@
 + zookeeper
 + gla
   + Grafana+Loki+Alloy轻量级日志系统
+  + [详细介绍](https://www.yuanyuan.blog/posts/d0ed3884.html)
 
 
 
